@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 import urllib.parse
 from django.urls import reverse
 from blog.models import Article, Tag
@@ -38,6 +38,18 @@ class ArticleListView(ListView):
         if page_obj and page_obj.has_next():
             query["page"] = page_obj.next_page_number()
             context["next_page_url"] = self._generate_prev_next_page(query)
+
+        context["tags"] = Tag.objects.all()
+
+        return context
+
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template = "article_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
 
         context["tags"] = Tag.objects.all()
 
