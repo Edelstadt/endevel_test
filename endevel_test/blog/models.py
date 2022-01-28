@@ -13,6 +13,9 @@ class Tag(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+    class Meta:
+        ordering = ["-id"]
 
 
 class Article(models.Model):
@@ -43,3 +46,6 @@ class Article(models.Model):
 
     def __str__(self) -> str:
         return self.title_eng
+
+    class Meta:
+        ordering = ["-id"]
